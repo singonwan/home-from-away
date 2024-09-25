@@ -19,7 +19,7 @@ export function SubmitButton({
 		<Button
 			type="submit"
 			disabled={pending}
-			className={`capitalize${className}`}
+			className={`capitalize ${className}`}
 			size="lg"
 		>
 			{pending ? (
