@@ -1,17 +1,16 @@
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-// import { Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 // grabbing from prisma
-// const name = Prisma.PropertyScalarFieldEnum.price
+const name = Prisma.PropertyScalarFieldEnum.price;
 
 type PriceInputProps = {
 	defaultValue?: number;
 };
 
 function PriceInput({ defaultValue }: PriceInputProps) {
-	const name = 'price';
-
+	// const name = 'price';
 	return (
 		<div className="mb-2">
 			<Label htmlFor={name} className="capitalize">
