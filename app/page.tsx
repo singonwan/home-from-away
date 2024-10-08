@@ -9,6 +9,8 @@ function HomePage({
 	searchParams: { category?: string; search?: string };
 }) {
 	// console.log(searchParams);
+	// only available in server components
+	// searchParams gathers the query params passed via the URL - ?someQuery=value
 
 	return (
 		<section>
