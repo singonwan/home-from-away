@@ -1,6 +1,7 @@
 'use server';
 
 import {
+	createReviewSchema,
 	imageSchema,
 	profileSchema,
 	propertySchema,
@@ -280,8 +281,28 @@ export const fetchPropertyDetails = async (id: string) => {
 	});
 };
 
-export const createReviewAction = async () => {
-	return { message: 'create review' };
+export const createReviewAction = async (
+	prevState: any,
+	formData: FormData
+) => {
+	const user = await getAuthUser();
+
+	try {
+		const rawData = Object.fromEntries(formData);
+		const validatedFields = validateWithZodScehma(createReviewSchema, rawData);
+		await db.review.create({
+			data: {
+				...validatedFields,
+				profileId: user.id,
+			},
+		});
+
+		revalidatePath(`/properties/${validatedFields.propertyId}`);
+
+		return { message: 'Review Submitted Successfully' };
+	} catch (error) {
+		renderError(error);
+	}
 };
 
 export const fetchPropertyReviews = async () => {
