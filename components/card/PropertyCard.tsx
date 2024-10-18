@@ -6,7 +6,7 @@ import FavoriteToggleButton from './FavoriteToggleButton';
 import { PropertyCardProps } from '@/utils/types';
 import { formatCurrency } from '@/utils/format';
 
-function PropertyCard({ property }: { propert: PropertyCardProps }) {
+function PropertyCard({ property }: { property: PropertyCardProps }) {
 	const { name, image, price } = property;
 	const { country, id: propertyId, tagline } = property;
 
