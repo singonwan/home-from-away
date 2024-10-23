@@ -281,15 +281,14 @@ export const fetchPropertyDetails = async (id: string) => {
 	});
 };
 
-export const createReviewAction = async (
-	prevState: any,
-	formData: FormData
-) => {
+export async function createReviewAction(prevState: any, formData: FormData) {
 	const user = await getAuthUser();
 
 	try {
 		const rawData = Object.fromEntries(formData);
+
 		const validatedFields = validateWithZodScehma(createReviewSchema, rawData);
+
 		await db.review.create({
 			data: {
 				...validatedFields,
@@ -303,7 +302,7 @@ export const createReviewAction = async (
 	} catch (error) {
 		renderError(error);
 	}
-};
+}
 
 export const fetchPropertyReviews = async (propertyId: string) => {
 	const reviews = await db.review.findMany({
