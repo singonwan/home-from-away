@@ -482,3 +482,62 @@ export const deleteBookingAction = async (prevState: { bookingId: string }) => {
 		return renderError(error);
 	}
 };
+
+export const fetchRentals = async () => {
+	const user = await getAuthUser();
+	const rentals = await db.property.findMany({
+		where: {
+			profileId: user.id,
+		},
+		select: {
+			id: true,
+			name: true,
+			price: true,
+		},
+	});
+
+	// promise.all for concurrency
+	const rentalsWithBookingsSums = await Promise.all(
+		rentals.map(async (rental) => {
+			const totalNightSum = await db.booking.aggregate({
+				where: {
+					propertyId: rental.id,
+				},
+				_sum: {
+					totalNights: true,
+				},
+			});
+			const orderTotalSum = await db.booking.aggregate({
+				where: {
+					propertyId: rental.id,
+				},
+				_sum: {
+					orderTotal: true,
+				},
+			});
+			return {
+				...rental,
+				totalNightsSum: totalNightSum._sum.totalNights,
+				orderTotalSum: orderTotalSum._sum.orderTotal,
+			};
+		})
+	);
+	return rentalsWithBookingsSums;
+};
+
+export const deleteRentalAction = async (prevState: { propertyId: string }) => {
+	const { propertyId } = prevState;
+	const user = await getAuthUser();
+	try {
+		await db.property.delete({
+			where: {
+				id: propertyId,
+				profileId: user.id,
+			},
+		});
+		revalidatePath('/rentals');
+		return { message: 'Rental deleted successfully' };
+	} catch (error) {
+		return renderError(error);
+	}
+};
