@@ -1,5 +1,7 @@
 ## Home From Away - nextjs
 
+john smilga nextjs course
+
 ### tech stack
 - Next JS
 - TypeScript
