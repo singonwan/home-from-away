@@ -1,5 +1,18 @@
 ## Home From Away - nextjs
 
+# tech stack
+- Next JS
+- TypeScript
+- Shadcn/ui, tailwindCSS
+- Clerk, Zod - authenticaiton
+- Prisma, Supabase - database
+- server actions
+- Zustand - state management
+- React Suspense
+- Stripe - payment
+- use-debounce
+- react-day-picker
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
