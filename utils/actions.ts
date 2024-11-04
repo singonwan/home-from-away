@@ -314,7 +314,7 @@ export async function createReviewAction(prevState: any, formData: FormData) {
 
 		return { message: 'Review Submitted Successfully' };
 	} catch (error) {
-		renderError(error);
+		return renderError(error);
 	}
 }
 
