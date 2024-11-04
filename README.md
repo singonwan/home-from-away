@@ -1,6 +1,6 @@
 ## Home From Away - nextjs
 
-# tech stack
+### tech stack
 - Next JS
 - TypeScript
 - Shadcn/ui, tailwindCSS
